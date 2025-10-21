@@ -1,0 +1,64 @@
+' Copyright (C) 2025 - present Beispiel Hochschule Karlsruhe
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License
+' along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+' Preview durch <Alt>d
+
+@startuml ER Diagramm
+
+' hide the spot
+hide circle
+
+' evtl. Probleme mit Krähenfüßen vermeiden
+skinparam linetype ortho
+
+entity "Veranstalter" {
+  * id: integer <<generated>>
+  --
+  * version: integer
+  * name: text
+  * email: text
+    telefon: text
+    art: text
+  * aktiv: boolean
+  * erstellt_am: timestamp
+  * aktualisiert_am: timestamp
+}
+
+entity "Teilnehmer" {
+  * id: integer <<generated>>
+  --
+  * vorname: text
+  * nachname: text
+  * email: text
+  * registriert_am: timestamp
+  * **veranstalter_id**: integer <<FK>>
+}
+
+entity "Standort" {
+  * id: integer <<generated>>
+  --
+  * strasse: text
+  * plz: text
+  * ort: text
+  * land: text
+  * **veranstalter_id**: integer <<FK>>
+}
+
+Veranstalter ||..o{ Teilnehmer
+Veranstalter ||..|| Standort
+
+footer (c) Hochschule Karlsruhe
+
+@enduml

@@ -1,0 +1,10 @@
+id;strasse;plz;ort;land;veranstalter_id
+1;Hauptstraße 1;1010;Wien;Österreich;1
+20;Technologiepark 3;76131;Karlsruhe;Deutschland;20
+30;Innovation Way 5;EC2A;London;UK;30
+40;Zukunftsallee 10;80331;München;Deutschland;40
+50;Calle Futuro 7;28013;Madrid;Spanien;50
+60;Via Codice 12;00100;Rom;Italien;60
+70;Rue de Données 4;75001;Paris;Frankreich;70
+80;Ulica Softowa 8;00-001;Warschau;Polen;80
+90;Technikweg 9;8001;Zürich;Schweiz;90

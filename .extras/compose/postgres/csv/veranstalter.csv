@@ -1,0 +1,10 @@
+id;version;name;email;telefon;art;aktiv;erzeugt;aktualisiert
+1;0;ACME GmbH;kontakt@acme.at;+43-1-2345678;ONLINE;true;2025-02-01 00:00:00;2025-02-01 00:00:00
+20;0;TechCorp AG;info@techcorp.biz;+49-721-9876543;PRÄSENZ;true;2025-02-02 00:00:00;2025-02-02 00:00:00
+30;0;Innovate Ltd;hello@innovate.com;+44-20-1111111;HYBRID;true;2025-02-03 00:00:00;2025-02-03 00:00:00
+40;0;FutureWorks;team@futureworks.de;+49-89-5555555;ONLINE;true;2025-02-04 00:00:00;2025-02-04 00:00:00
+50;0;NextGen GmbH;kontakt@nextgen.es;+34-91-9876543;PRÄSENZ;true;2025-02-05 00:00:00;2025-02-05 00:00:00
+60;0;CodeLabs;info@codelabs.it;+39-06-4444444;HYBRID;false;2025-02-06 00:00:00;2025-02-06 00:00:00
+70;0;DataVision;mail@datavision.fr;+33-1-3333333;PRÄSENZ;false;2025-02-07 00:00:00;2025-02-07 00:00:00
+80;0;Softline;kontakt@softline.pl;+48-22-7777777;ONLINE;true;2025-02-08 00:00:00;2025-02-08 00:00:00
+90;0;BrightTech;info@brighttech.ch;+41-44-8888888;HYBRID;true;2025-02-09 00:00:00;2025-02-09 00:00:00
