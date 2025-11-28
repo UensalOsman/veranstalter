@@ -1,0 +1,80 @@
+generator client {
+  provider        = "prisma-client"
+  output          = "../src/generated/prisma"
+  previewFeatures = ["nativeDistinct", "relationJoins"]
+  engineType      = "client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  schemas  = ["veranstalter"]
+}
+
+model Standort {
+  id              Int          @id @default(autoincrement())
+  strasse         String
+  plz             String
+  ort             String
+  land            String       @default("Deutschland")
+  veranstalter_id Int          @unique
+  veranstalter    Veranstalter @relation(fields: [veranstalter_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@index([veranstalter_id])
+  @@map("standort")
+  @@schema("veranstalter")
+}
+
+model Teilnehmer {
+  id              Int          @id @default(autoincrement())
+  vorname         String
+  nachname        String
+  email           String       @unique
+  registriert     DateTime     @default(now()) @db.Timestamp(6)
+  veranstalter_id Int
+  veranstalter    Veranstalter @relation(fields: [veranstalter_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@index([veranstalter_id])
+  @@map("teilnehmer")
+  @@schema("veranstalter")
+}
+
+model Veranstalter {
+  id               Int               @id @default(autoincrement())
+  version          Int               @default(0)
+  name             String
+  email            String            @unique
+  telefon          String?
+  art              veranstalterart?
+  aktiv            Boolean           @default(true)
+  erzeugt          DateTime          @default(now()) @db.Timestamp(6)
+  aktualisiert     DateTime          @default(now()) @updatedAt @db.Timestamp(6)
+  standort         Standort?
+  teilnehmer       Teilnehmer[]
+  veranstalterFile VeranstalterFile?
+
+  @@map("veranstalter")
+  @@schema("veranstalter")
+}
+
+model VeranstalterFile {
+  id             Int          @id @default(autoincrement())
+  filename       String
+  data           Bytes
+  mimetype       String?
+  veranstalterId Int          @unique @map("veranstalter_id")
+  veranstalter   Veranstalter @relation(fields: [veranstalterId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@index([veranstalterId])
+  @@map("veranstalter_file")
+  @@schema("veranstalter")
+}
+
+enum veranstalterart {
+  ONLINE
+  PR_SENZ @map("PRÄSENZ")
+  HYBRID
+
+  @@map("veranstalterart")
+  @@schema("veranstalter")
+}

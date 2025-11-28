@@ -1,0 +1,131 @@
+# Copyright (C) 2025 - present
+#
+# Anpassung des GraphQL-Schemas für Veranstalter-Domain
+
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+"Funktionen, um Veranstalterdaten zu lesen"
+type Query {
+  "Alle Veranstalter anhand von Suchparametern abrufen"
+  veranstalter(suchparameter: VeranstalterSuchparameterInput): [Veranstalter!]
+
+  "Einzelnen Veranstalter anhand der ID abrufen"
+  veranstalterById(id: ID!): Veranstalter
+}
+
+"Funktionen, um Veranstalter anzulegen, zu aktualisieren oder zu löschen"
+type Mutation {
+  "Neuen Veranstalter anlegen"
+  create(input: VeranstalterInput!): CreatePayload
+
+  "Bestehenden Veranstalter aktualisieren"
+  update(input: VeranstalterUpdateInput!): UpdatePayload
+
+  "Veranstalter anhand der ID löschen"
+  delete(id: ID!): DeletePayload
+
+  "Authentifizierung: Token anfordern"
+  token(username: String!, password: String!): TokenPayload
+
+  "Authentifizierung: Refresh Token verwenden"
+  refresh(refreshToken: String!): TokenPayload
+}
+
+"Datenschema eines Veranstalters"
+type Veranstalter {
+  id: ID!
+  version: Int!
+  name: String!
+  email: String
+  telefon: String
+  aktiv: Boolean
+  art: String
+  standort: Standort!
+  teilnehmer: [Teilnehmer!]
+}
+
+"Datenschema eines Standorts (1:1-Beziehung)"
+type Standort {
+  ort: String!
+  plz: String!
+  strasse: String
+}
+"Datenschema eines Teilnehmers (1:n-Beziehung)"
+type Teilnehmer {
+  id: ID!
+  vorname: String!
+  nachname: String!
+  email: String
+}
+
+"Suchparameter für Veranstalter"
+input VeranstalterSuchparameterInput {
+  name: String
+  ort: String
+  aktiv: Boolean
+  kategorie: String
+}
+
+"Input für einen neuen Veranstalter"
+input VeranstalterInput {
+  name: String!
+  email: String
+  telefon: String
+  aktiv: Boolean
+  art: String
+  standort: StandortInput!
+  teilnehmer: [TeilnehmerInput!]
+}
+
+"Input für das Aktualisieren eines Veranstalters"
+input VeranstalterUpdateInput {
+  id: ID!
+  version: Int!
+  name: String
+  email: String
+  telefon: String
+  aktiv: Boolean
+  art: String
+  standort: StandortInput
+  teilnehmer: [TeilnehmerInput!]
+}
+
+"Input für Standortdaten"
+input StandortInput {
+  ort: String!
+  plz: String!
+  strasse: String
+}
+
+"Input für Teilnehmerdaten"
+input TeilnehmerInput {
+  vorname: String!
+  nachname: String!
+  email: String
+}
+
+"Payload für erfolgreiches Erstellen"
+type CreatePayload {
+  id: ID!
+}
+
+"Payload für erfolgreiches Aktualisieren"
+type UpdatePayload {
+  version: Int!
+}
+
+"Payload für erfolgreiches Löschen"
+type DeletePayload {
+  success: Boolean!
+}
+
+"Access- und Refresh-Token (Auth)"
+type TokenPayload {
+  accessToken: String!
+  expiresIn: Int!
+  refreshToken: String!
+  refreshExpiresIn: Int!
+}

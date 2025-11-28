@@ -6,7 +6,7 @@
 -- docker compose exec db bash
 -- psql --dbname=veranstaltung --username=veranstaltung --file=/sql/create-table.sql
 
-SET default_tablespace = veranstalterspace;
+SET default_tablespace = veranstalter_space;
 
 CREATE SCHEMA IF NOT EXISTS AUTHORIZATION veranstalter;
 

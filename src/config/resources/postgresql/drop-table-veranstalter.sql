@@ -15,7 +15,7 @@
 
 -- Aufruf:
 -- docker compose exec db bash
--- psql --dbname=buch --username=buch --file=/sql/drop-table.sql
+-- psql --dbname=veranstalter --username=veranstalter --file=/sql/drop-table.sql
 
 set search_path to 'veranstalter';
 

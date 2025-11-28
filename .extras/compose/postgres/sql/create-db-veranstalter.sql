@@ -26,4 +26,4 @@ CREATE DATABASE veranstalter;
 GRANT ALL ON DATABASE veranstalter TO veranstalter;
 
 -- https://www.postgresql.org/docs/current/sql-createtablespace.html
-CREATE TABLESPACE veranstalterspace OWNER veranstalter LOCATION '/var/lib/postgresql/tablespace/veranstalter';
+CREATE TABLESPACE veranstalter_space OWNER veranstalter LOCATION '/var/lib/postgresql/tablespace/veranstalter';
